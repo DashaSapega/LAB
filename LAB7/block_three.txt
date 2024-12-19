@@ -1,0 +1,33 @@
+import os
+import shutil
+
+def show_file_content(file_path):#2
+
+    if os.path.isfile(file_path):
+        with open(file_path, 'r', encoding='utf-8') as file:
+            print(file.read())
+    else:
+        print(f"Файл {file_path} не найден.")
+
+def create_file_or_folder(path):#5
+    if os.path.exists(path):
+        print(f"Путь {path} уже существует.")
+    elif path.endswith(os.sep):
+        os.makedirs(path)
+        print(f"Папка {path} создана.")
+    else:
+        with open(path, 'w', encoding='utf-8') as file:
+            pass
+        print(f"Файл {path} создан.")
+        
+ def move(src_path, dest_path):#9
+    """Перемещает файл или папку."""
+    if not os.path.exists(src_path):
+        print("Источник не существует.")
+        return
+
+    try:
+        shutil.move(src_path, dest_path)
+        print(f"Перемещение успешно: {src_path} -> {dest_path}")
+    except Exception as e:
+        print(f"Ошибка при перемещении: {e}")
